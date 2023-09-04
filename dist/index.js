@@ -65,9 +65,95 @@ let product1 = {
     photo: "sampleUrl"
 };
 console.log(getData(product1));
-const users = {
-    john: { age: 34 },
-    andrew: { age: 25 },
-    elon: { age: 26 },
-    jack: { age: 19 }
-};
+/**-------------------TYPESCRIPT CLASSES----------- */
+/**-------------------TYPE ASSERTION------------------------- */
+/*Accessing Element*/
+// 1:- const btn=document.getElementById("btn")!;
+// const btn=<HTMLElement> document.getElementById("btn");
+// const btn=document.getElementById("btn") as HTMLElement
+// btn.onclick
+/**Accessing Tag*/
+// const myimg=document.getElementById("myimg") as HTMLImageElement ;
+// myimg.src
+/*const form=document.getElementById("myform") as HTMLFormElement
+const input=document.getElementById("myinput") as HTMLInputElement
+
+form.onsubmit=(e)=>{
+   e.preventDefault();
+   const ans=Number(input.value);
+   const h2=document.createElement("h2");
+   h2.textContent=String(ans+20);
+   const body=document.querySelector("body") as HTMLBodyElement
+   body.append(h2);
+}*/
+/*interface Person{
+  name:string,
+  email:string,
+//   [key:string]:string //Dynamic Key
+}*/
+/*const personDetail:Person={
+   name:"saksham",
+   email:"sakshampardesi5831@gmail.com"
+}*/
+//Suppose we don't know the types comes from 3rd party Api then the syntax for accessing is 
+/*let key="name"
+personDetail[key as keyof typeof personDetail]*/
+// const getName=():string=>{
+//     return personDetail.name;
+// }
+// const getEmail=():string=>{
+//    return personDetail.email
+// }
+// // const getPersonData=(key:"name"|"email")=>{
+// //     return personDetail[key];
+// // }
+/*const getPersonData=(key:keyof Person)=>{
+    return personDetail[key];
+}
+getPersonData("email")**/
+/**----------------TYPESCRIPT UTILITY CLASSES--------------------------------------------- */
+//Partial<User> this will give the optional property to every when is used to another type 
+/*type User={
+    name:string,
+    email:string
+}
+type User2=Partial<User>*/
+//Required<Type> -opposite to Partial 
+/*type User={
+    name:string,
+    email:string
+}
+
+const Person1:Required<User>={
+    name:"saksham",
+    email:'sakshampardesi5831@gmail.com'
+}*/
+//<Readonly<User> -> makes every property readonly
+/*type User={
+    name:string,
+    email:string
+}
+const Person1:Readonly<User>={
+    name:"saksham",
+    email:'sakshampardesi5831@gmail.com'
+}*/
+// Record<Key,type>
+/*type User={
+    name:string,
+    email:string
+}
+type User2=Record<"name"|"email",string>*/
+//EXAMPLE OF RECORD
+/*interface UserInfo{
+    age:number
+}
+
+type Person1 = "john" | "andrew" | "elon" | "jack"
+
+const users:Record<Person1,UserInfo>={
+    john:{age:34},
+    andrew:{age:25},
+    elon:{age:26},
+    jack:{age:19}
+}*/
+//Pick<Type,Keys>
