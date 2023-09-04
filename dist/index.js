@@ -156,4 +156,95 @@ const users:Record<Person1,UserInfo>={
     elon:{age:26},
     jack:{age:19}
 }*/
-//Pick<Type,Keys>
+//Pick<Type,Keys> -> Pick used getting special Values 
+/*interface OrderInfo{
+    readonly id:string,
+    user:string,
+    city:string,
+    country:string,
+    status:string,
+}
+type ShippingInfo=Pick<OrderInfo,"city" | "country" |"user">
+//Omit<Type,keys> -> inverse of pick Enter the interface in which values are declare and remove it for next interface
+type Random=Omit<OrderInfo,"city">*/
+//Exclude<Type,ExcludedUnion> -> It will remove the type  which is not needed
+/*type MyUnion=string|number|boolean
+type Random=Exclude<MyUnion,boolean>*/
+//Extract<Type,Union> -> It will include the only property which is needed which is enter 
+/*type MyUnion=string|number|boolean
+type Random=Extract<MyUnion,boolean>*/
+//NonNullableType<Type> -> It will remove null and undefined from the type
+/*type MyUnion=string|number|boolean|null|undefined
+type Random=NonNullable<MyUnion>*/
+// Parameters<Type> ->It will define the Function parameters
+/*const myfunc=(a:number,b:number)=>{
+   console.log(a+b);
+}
+type Random =Parameters<typeof myfunc> //=> when we hover it will give parameter info in array form */
+// ConstructorParameters<Type> => it is similar Parameters difference is it will show constructor parameter
+/*class SampleClass{
+    constructor(public s:string,public t:string){}
+}
+type Random=ConstructorParameters<typeof SampleClass>*/
+// ReturnType<Type> => it will tell the Return type of the function which will import from another components
+/*const myfunc=(a:number,b:number)=>{
+    return a+b
+ }
+ type MyFunc=ReturnType<typeof myfunc>*/
+// InstanceType<Type> -> it is similar to constructor parameter 
+/*class SampleClass{
+    constructor(public s:string,public t:string){}
+}
+type Random =InstanceType<typeof SampleClass>
+
+const instanceUsers:Random={
+    s:"4441",
+    t:"23"
+}*/
+/**----------------------------------TYPESCRIPT GENERICS-----------------------------------------------*/
+// BASIC SYNTAX ->It's Link a placeholder in which will detect the what value is return and it will set accoding to that  
+/*const Gfunc= <CustomType>(n:CustomType):CustomType=>{
+   return n;
+}
+let ans=Gfunc(20);
+let ans2=Gfunc("20");*/
+// USING OBJECT 
+/*type Person={
+    name:string,
+    age:number
+}
+const person1:Person={
+    name:"saksham",
+    age:24
+}
+const Gfunc= <CustomType>(n:CustomType):CustomType=>{
+    return n;
+ }
+const ans=Gfunc(person1)
+//Hover over function and is you want set the hard coded value  as per below Syntax we hard Coded to tell that custom type is Object
+ const ans1=Gfunc<Person>(person1)*/
+//We Can Also use Multiple Generics function below
+const M_Gfunc = (n, o) => {
+    return { n, o };
+};
+const ans = M_Gfunc(20, "Lol");
+const users = [
+    {
+        name: "saksham",
+        age: 24,
+    },
+    {
+        name: "levi",
+        age: 56
+    },
+    {
+        name: "john",
+        age: 40
+    }
+];
+const filterByPeople = (arr, property, value) => {
+    return arr.filter((item) => item[property] === value);
+};
+const filterByName = filterByPeople(users, "name", "saksham");
+const filterByAge = filterByPeople(users, "age", 56);
+console.log(filterByAge);

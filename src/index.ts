@@ -260,3 +260,61 @@ const instanceUsers:Random={
     t:"23"
 }*/
 
+/**----------------------------------TYPESCRIPT GENERICS-----------------------------------------------*/
+// BASIC SYNTAX ->It's Link a placeholder in which will detect the what value is return and it will set accoding to that  
+/*const Gfunc= <CustomType>(n:CustomType):CustomType=>{
+   return n;
+}
+let ans=Gfunc(20);
+let ans2=Gfunc("20");*/
+// USING OBJECT 
+/*type Person={
+    name:string,
+    age:number
+}
+const person1:Person={
+    name:"saksham",
+    age:24
+}
+const Gfunc= <CustomType>(n:CustomType):CustomType=>{
+    return n;
+ }
+const ans=Gfunc(person1)
+//Hover over function and is you want set the hard coded value  as per below Syntax we hard Coded to tell that custom type is Object
+ const ans1=Gfunc<Person>(person1)*/
+
+//We Can Also use Multiple Generics function below
+
+const M_Gfunc=<T,U>(n:T,o:U):{n:T,o:U}=>{
+    return {n,o}
+}
+const ans=M_Gfunc<number,string>(20,"Lol");
+
+//Example of TypeScript 
+
+type Person={
+    name:string,
+    age:number
+}
+ const users:Person[]=[
+    {
+      name:"saksham",
+      age:24,
+    },
+    {
+        name:"levi",
+        age:56
+    },
+    {
+        name:"john",
+        age:40
+    }
+ ]
+
+const filterByPeople= <T,K extends keyof T>(arr:T[],property:K,value:T[K]):T[]=>{
+     
+  return arr.filter((item)=>item[property]===value);
+}
+const filterByName=filterByPeople(users,"name","saksham");
+const filterByAge=filterByPeople(users,"age",56);
+console.log(filterByAge);
